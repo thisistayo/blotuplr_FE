@@ -1,4 +1,6 @@
-# uploader
+# uploader 
+
+Vue.js frontend to upload images to minio for blot
 
 ## Project setup
 ```
