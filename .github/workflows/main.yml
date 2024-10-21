@@ -1,0 +1,36 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          path: ./  # Explicitly set the working directory
+
+      - name: List contents of working directory
+        run: ls -la
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Docker Hub
+        run: echo lucaPWD4d0ck34 | docker login -u lucarv --password-stdin
+
+      - name: Set Docker Buildx Contextå
+        run: |
+          export DOCKER_CLI_CONTEXT=default
+      
+      - name: Build and push Docker image
+        run: |
+          docker buildx create --use
+          docker buildx build --platform linux/amd64 -t lucarv/blotupl4_FE:latest --push .
+      
+        
